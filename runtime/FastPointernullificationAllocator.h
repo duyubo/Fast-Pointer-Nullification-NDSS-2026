@@ -1,6 +1,6 @@
 #ifndef FAST_ALLOCATOR_H
 #define FAST_ALLOCATOR_H
-#include "FastPointernullification-v1.h"
+#include "FastPointernullification.h"
 #include <malloc.h>
 #define fastPN__mem2chunk(mem) mem2chunk(mem&((size_t)0x0000ffffffffffff))
 #define FASTPN_ALIAS(name)      __attribute__((__alias__(name)))

@@ -1,0 +1,12 @@
+# CMake-generated files (compiler_pass is configured in-source with `cmake .`)
+compiler_pass/CMakeCache.txt
+compiler_pass/CMakeFiles/
+compiler_pass/Makefile
+compiler_pass/cmake_install.cmake
+
+# Build outputs
+*.so
+*.o
+*.a
+runtime/shared/
+runtime/static/

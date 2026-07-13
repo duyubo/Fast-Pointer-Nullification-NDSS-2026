@@ -1,4 +1,4 @@
-#include "FastPointernullification-v1.h"
+#include "FastPointernullification.h"
 #define __METADATA_INLINE __attribute__((__weak__, __always_inline__))
 bool already_initialized = false;
 
@@ -566,18 +566,9 @@ void RegPtr(void **ptr, void *ptr_value){
     
 }; 
 
-void fast_preinit(int argc, char **argv, char **envp)
-{   
-   printf("library loaded!\n");
-   InitMetadataSpace();
-
+// .preinit_array is only representable in the main executable, not in a DSO,
+// so the shared library registers its initializer as an ELF constructor instead.
+__attribute__((constructor)) static void fast_preinit(void) {
+    InitMetadataSpace();
 }
-__attribute__((section(".preinit_array"), used))
-void (*__local_effective_preinit)(int argc, char **argv, char **envp) =
-	fast_preinit;
-
-//__attribute__((constructor)) void fast_preinit(void) {
-//    printf("library loaded!\n");
-//    InitMetadataSpace();
-//}
 

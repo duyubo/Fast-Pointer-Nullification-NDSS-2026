@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -e
+
+BASE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+if [ $# -eq 0 ]
+  then
+    echo "USAGE: $0 [options] file..."
+    exit 0
+fi
+
+# The optimization level must be greater than -O0,
+# otherwise some analysis methods cannot be enabled.
+# But over-optimization (O2 or higher) can lead to changes in semantics.
+exec clang \
+    -O2 -fpass-plugin="$BASE/compiler_pass/libFPNPass.so" \
+    "$@" \
+    -Qunused-arguments \
+    -Wpointer-arith -Wpointer-to-int-cast -Wno-error=int-conversion -Wno-int-conversion \
+    -L"$BASE/runtime/shared" -lFPN -Wl,-rpath,"$BASE/runtime/shared"

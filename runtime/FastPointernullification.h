@@ -18,7 +18,6 @@
 #include <thread>
 #include <unordered_map>
 #include <ctime>
-#include "DSE.h"
 using namespace std;
 
 
@@ -29,12 +28,10 @@ using namespace std;
 //#define TEST 1
 
 #define OPT0 1 // check the saved buffer size info to reduce duplicate registered pointers
-//#define OPT1 1 // maintain blocks on heap and not on heap seperately
 #define RESERVE_ADVANCE 1 // reserve a specific size of linked list in advance
-//#define OPT2 // track stack by range
-//#define OPT3 // track global by range
+#define OPT0_STEPS 5
 
-#define MultipleThread
+//#define MultipleThread
 #define COMPATIBLE 1
 #define COMPATIBLE1 1
 #define COMPATIBLE_NON_HEAP 1
